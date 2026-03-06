@@ -34,3 +34,6 @@ response = model.generate(input_prompt)
 
 ---
 *Developed by Josue | Lead Researcher @ TEL-OS Project*
+
+## Limitations & Scope
+*TEL-OS v2.0 is specifically optimized for prefix-injection attacks (e.g., Sockpuppet) and direct harm queries. While the underlying latent governance architecture is extensible, its effectiveness against high-entropy, long-context adaptive grooming (TrailBlazer) is currently calibrated for turn-based mitigation. We recommend a multi-layer approach for mission-critical safety.*
