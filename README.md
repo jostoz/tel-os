@@ -32,6 +32,46 @@ response = model.generate(input_prompt)
 *   **Agnostic:** Works on residual architecture, not on words.
 *   **Zero-Overhead:** ~0.8% additional latency.
 
+## Download Required Vector Files
+The TEL-OS vector files (~256MB total) are hosted on Hugging Face due to their size. Download them before running the application:
+
+Using the Hugging Face Hub library:
+```bash
+pip install huggingface_hub
+```
+
+Then download the required vector files:
+```python
+from huggingface_hub import hf_hub_download
+import os
+
+# Create vectors directory if it doesn't exist
+os.makedirs("./data/vectors", exist_ok=True)
+
+# Download the vector files
+hf_hub_download(
+    repo_id="Josstos/telos-vector", 
+    filename="refusal_directions.pt", 
+    local_dir="./data/vectors/"
+)
+
+hf_hub_download(
+    repo_id="Josstos/telos-vector", 
+    filename="refusal_subspaces.pt", 
+    local_dir="./data/vectors/"
+)
+```
+
+Or using command line:
+```bash
+# Install the huggingface_hub CLI
+pip install huggingface_hub
+
+# Download the files
+huggingface-cli download Josstos/telos-vector refusal_directions.pt --local-dir ./data/vectors/
+huggingface-cli download Josstos/telos-vector refusal_subspaces.pt --local-dir ./data/vectors/
+```
+
 ---
 *Developed by Josue | Lead Researcher @ TEL-OS Project*
 

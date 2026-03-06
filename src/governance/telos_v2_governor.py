@@ -1,18 +1,35 @@
 import torch
 import torch.nn.functional as F
-
-# ====================== TEL-OS v2.0 - HOOK COMPLETO ======================
-# Vector real extraído con OBLITERATUS (capa 20 = la más fuerte)
 import os
 from pathlib import Path
 
-# Get the root directory of the project (assuming the script runs from project root)
-root_dir = Path(__file__).resolve().parent.parent.parent
-directions_path = root_dir / "data" / "vectors" / "refusal_directions.pt"
-refusal_directions = torch.load(directions_path, map_location="cpu")
-refusal_vector = refusal_directions[20].to(h.device)   # ← Capa más potente
+# ====================== TEL-OS v2.0 - HOOK COMPLETO ======================
+# Vector real extraído con OBLITERATUS (capa 20 = la más fuerte)
 
-print(f"[TEL-OS] Vector de refusal cargado correctamente (capa 20)")
+def load_refusal_vectors():
+    """Load refusal vectors from local file or download from Hugging Face if not found."""
+    root_dir = Path(__file__).resolve().parent.parent.parent
+    directions_path = root_dir / "data" / "vectors" / "refusal_directions.pt"
+    
+    # Check if file exists
+    if not directions_path.exists():
+        print(f"[TEL-OS] Error: Vector file not found at {directions_path}")
+        print("[TEL-OS] Please download the required vector files from Hugging Face:")
+        print("  Repo: Josstos/telos-vector")
+        print("  Files: refusal_directions.pt, refusal_subspaces.pt")
+        print("  Command: huggingface-cli download Josstos/telos-vector refusal_directions.pt --local-dir ./data/vectors/")
+        raise FileNotFoundError(f"Vector file not found: {directions_path}. See README.md for download instructions.")
+    
+    # Load the vectors
+    refusal_directions = torch.load(directions_path, map_location="cpu")
+    return refusal_directions[20]  # Return layer 20 vector
+
+try:
+    refusal_vector = load_refusal_vectors()
+    print(f"[TEL-OS] Vector de refusal cargado correctamente (capa 20)")
+except Exception as e:
+    print(f"[TEL-OS] Error loading refusal vectors: {e}")
+    raise
 
 # ====================== TU HOOK PRINCIPAL ======================
 def tel_os_hook(module, input, output, layer_idx):
