@@ -1,5 +1,10 @@
 # TEL-OS v2.0 | Latent Governance Engine
 
+![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Status](https://img.shields.io/badge/status-beta-yellow.svg)
+![Downloads](https://img.shields.io/pypi/dm/telos.svg)
+
 **TEL-OS** is an *inference-only* governance engine that intervenes in the residual flow of LLMs to neutralize malicious behaviors. Unlike traditional text-based filters (guardrails), TEL-OS uses **latent physics** to detect intentions in the model's "semantic awakening" (Layer 12), before damage crystallizes in the output.
 
 ## 🚀 Validated Results (Llama-3.1-8B-Instruct)
@@ -17,13 +22,13 @@
 
 ## ⚡ Quickstart
 ```python
-from telos.governance import TELOS_V2_Governor
+from telos import TELGovernor
 
-# Load your model and extracted vectors
-governor = TELOS_V2_Governor(model, config_path="configs/production.yaml")
-governor.attach_hooks()
+# Load your model and initialize the governor
+governor = TELGovernor(threshold=0.05, decay=0.85, beta=1.0)
+governor.attach(model)
 
-# The model is now a Sovereign Agent protected against injections
+# The model is now protected against jailbreak attacks
 response = model.generate(input_prompt)
 ```
 

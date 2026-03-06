@@ -1,38 +1,14 @@
-# Aegis-HR Requirements
-# Core ML/Interpretability Dependencies
-transformer_lens>=1.8.0
-sae_lens>=0.5.0
+# TEL-OS v2.0 Requirements
+# Validated with Python 3.11, CUDA 12.1
+
+# Core dependencies
 torch>=2.1.0
-numpy>=1.24.0
-
-# API & Web
-fastapi>=0.100.0
-uvicorn[standard]>=0.23.0
-httpx>=0.24.0
-
-# Data & Config
-pydantic>=2.0.0
-pydantic-settings>=2.0.0
-pyyaml>=6.0.0
-
-# Caching & Performance
-redis>=4.5.0
+transformers>=4.40.0
+accelerate>=0.25.0
 
 # Utilities
-python-dotenv>=1.0.0
-tqdm>=4.65.0
-loguru>=0.7.0
+pyyaml>=6.0
+numpy>=1.24.0
 
-# GLP Refiner (Capa 4) - Generative Latent Prior
-diffusers>=0.24.0          # FlowMatchEulerDiscreteScheduler
-omegaconf>=2.3.0          # Config loading
-safetensors>=0.4.0        # Checkpoint loading
-
-# Cryptography for audit
-cryptography>=41.0.0
-
-# Development & Testing
-pytest>=7.4.0
-pytest-asyncio>=0.21.0
-ipykernel>=6.23.0
-jupyter>=1.0.0
+# Optional: for downloading models
+huggingface-hub>=0.19.0

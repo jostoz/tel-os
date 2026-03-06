@@ -1,0 +1,31 @@
+# TEL-OS Default Configuration
+# ===========================
+# 
+# Golden configuration validated with StrongREJECT benchmark
+# - ASR (Attack Success Rate): 0% (0/100 malicious)
+# - Over-refusal: 0% (0/20 benign)
+
+model:
+  name: "meta-llama/Meta-Llama-3.1-8B-Instruct"
+
+governor:
+  # Detection (Layer 12)
+  detection_layer: 12
+  urgency_threshold: 0.05  # Golden: 0.05
+  
+  # KV-Cache Decay
+  decay_factor: 0.85       # Golden: 0.85
+  
+  # Distributed Steering (Layers 9, 11, 13, 15)
+  steering_layers: [9, 11, 13, 15]
+  beta_base: 1.0           # Golden: 1.0
+  beta_max: 2.0
+
+vectors:
+  # Path to refusal direction vectors
+  path: "data/vectors.pt"
+  
+# Additional runtime parameters
+runtime:
+  device: "cuda"          # Use "cpu" if CUDA not available
+  batch_size: 1           # For sequential processing
