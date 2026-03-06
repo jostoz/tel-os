@@ -1,0 +1,31 @@
+# Production Configuration for tel-os
+# Optimized for security and performance in production environments
+
+model:
+  name: "telos-governor-v2"
+  version: "2.1.0"
+  
+security:
+  rejection_threshold: 0.85
+  vector_dimensionality: 512
+  max_query_length: 1024
+  timeout_seconds: 30
+  
+performance:
+  batch_size: 32
+  cache_size: 1000
+  num_workers: 4
+  
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_output: true
+  max_file_size: "10MB"
+  
+monitoring:
+  metrics_enabled: true
+  health_check_interval: 60
+  alert_thresholds:
+    error_rate: 0.01
+    response_time: 5.0
+    memory_usage: 0.8
