@@ -103,7 +103,13 @@ def demo():
         
         # With TEL-OS
         print("\n--- WITH TEL-OS ---")
-        governor = TELGovernor(threshold=0.05, decay=0.85, beta=1.0)
+        # Using the new Hugging Face URL for vectors
+        governor = TELGovernor(
+            threshold=0.05, 
+            decay=0.85, 
+            beta=1.0,
+            vectors_path="https://huggingface.co/datasets/Josstos/telos-vector/resolve/main/refusal_directions.pt"
+        )
         governor.attach(model)
         
         response_protected = generate_response(model, tokenizer, test['prompt'])

@@ -25,6 +25,8 @@ import torch.nn.functional as F
 from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass
 from pathlib import Path
+import tempfile
+import os
 
 
 @dataclass
@@ -77,7 +79,8 @@ class TELGovernor:
                  decay: float = 0.85,
                  beta: float = 1.0,
                  vectors_path: str = "data/vectors.pt",
-                 device: str = "cuda"):
+                 device: str = "cuda",
+                 use_hf_cache: bool = True):
         """
         Initialize TEL-OS Governor.
         
@@ -87,6 +90,7 @@ class TELGovernor:
             beta: Base steering strength (default: 1.0)
             vectors_path: Path to refusal direction vectors
             device: Device for computation
+            use_hf_cache: Whether to cache downloaded vectors locally (default: True)
         """
         self.config = TELConfig(
             urgency_threshold=threshold,
@@ -95,6 +99,7 @@ class TELGovernor:
             refusal_vectors_path=vectors_path
         )
         self.device = device
+        self.use_hf_cache = use_hf_cache
         self.vectors = self._load_vectors()
         self.hooks = []
         
@@ -103,14 +108,47 @@ class TELGovernor:
         self._decay_triggered = False
         
     def _load_vectors(self) -> Dict[str, torch.Tensor]:
-        """Load refusal vectors from file."""
+        """Load refusal vectors from file or download from Hugging Face."""
         vectors = {}
         
-        path = Path(self.config.refusal_vectors_path)
-        if not path.exists():
-            raise FileNotFoundError(f"Vectors not found: {path}")
-        
-        data = torch.load(path, map_location=self.device)
+        # Check if path is a local file or Hugging Face URL
+        if self.config.refusal_vectors_path.startswith(('http://', 'https://')):
+            # Download from Hugging Face
+            import urllib.request
+            import tempfile
+            import os
+            
+            # Create cache directory if needed
+            cache_dir = Path.home() / ".cache" / "telos"
+            cache_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Create cache filename based on URL
+            import hashlib
+            url_hash = hashlib.md5(self.config.refusal_vectors_path.encode()).hexdigest()
+            cache_path = cache_dir / f"vectors_{url_hash}.pt"
+            
+            if self.use_hf_cache and cache_path.exists():
+                # Use cached file
+                data = torch.load(cache_path, map_location=self.device)
+            else:
+                # Download and cache the file
+                with tempfile.NamedTemporaryFile(delete=False, suffix='.pt') as tmp_file:
+                    urllib.request.urlretrieve(self.config.refusal_vectors_path, tmp_file.name)
+                    data = torch.load(tmp_file.name, map_location=self.device)
+                    
+                    # Cache the file if caching is enabled
+                    if self.use_hf_cache:
+                        cache_path.parent.mkdir(parents=True, exist_ok=True)
+                        torch.save(data, cache_path)
+                    
+                    os.unlink(tmp_file.name)  # Remove temporary file after loading
+        else:
+            # Load from local file
+            path = Path(self.config.refusal_vectors_path)
+            if not path.exists():
+                raise FileNotFoundError(f"Vectors not found: {path}")
+            
+            data = torch.load(path, map_location=self.device)
         
         # Detection vector (Layer 12)
         det_layer = self.config.detection_layer
@@ -236,7 +274,8 @@ def create_governor(
     threshold: float = 0.05,
     decay: float = 0.85,
     beta: float = 1.0,
-    vectors_path: str = "data/vectors.pt"
+    vectors_path: str = "data/vectors.pt",
+    use_hf_cache: bool = True
 ) -> TELGovernor:
     """
     Factory function to create a TELGovernor with validated defaults.
@@ -250,6 +289,7 @@ def create_governor(
         decay: Decay factor (default: 0.85)
         beta: Steering strength (default: 1.0)
         vectors_path: Path to vectors file
+        use_hf_cache: Whether to cache downloaded vectors locally (default: True)
     
     Returns:
         Configured TELGovernor instance
@@ -258,5 +298,6 @@ def create_governor(
         threshold=threshold,
         decay=decay,
         beta=beta,
-        vectors_path=vectors_path
+        vectors_path=vectors_path,
+        use_hf_cache=use_hf_cache
     )
