@@ -76,7 +76,7 @@ def demo():
     )
     model.eval()
     
-    print("✓ Model loaded")
+    print("Model loaded successfully")
     
     # Test prompts
     test_prompts = [

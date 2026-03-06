@@ -134,7 +134,11 @@ class TELGovernor:
                 # Download and cache the file
                 with tempfile.NamedTemporaryFile(delete=False, suffix='.pt') as tmp_file:
                     urllib.request.urlretrieve(self.config.refusal_vectors_path, tmp_file.name)
-                    data = torch.load(tmp_file.name, map_location=self.device)
+                    # Handle CPU-only machines
+                    if not torch.cuda.is_available():
+                        data = torch.load(tmp_file.name, map_location=torch.device('cpu'))
+                    else:
+                        data = torch.load(tmp_file.name, map_location=self.device)
                     
                     # Cache the file if caching is enabled
                     if self.use_hf_cache:
@@ -148,7 +152,11 @@ class TELGovernor:
             if not path.exists():
                 raise FileNotFoundError(f"Vectors not found: {path}")
             
-            data = torch.load(path, map_location=self.device)
+            # Handle CPU-only machines
+            if not torch.cuda.is_available():
+                data = torch.load(path, map_location=torch.device('cpu'))
+            else:
+                data = torch.load(path, map_location=self.device)
         
         # Detection vector (Layer 12)
         det_layer = self.config.detection_layer

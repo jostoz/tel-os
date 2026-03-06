@@ -41,14 +41,14 @@ response = model.generate(input_prompt)
 
 ### Current Position of TEL-OS v2.0 in the Literature (March 2026)
 
-| Paper / Method (year) | ASR típico en Sockpuppet / StrongREJECT | Over-refusal típico | Tipo de defensa | Dónde queda TEL-OS v2.0 |
+| Paper / Method (year) | Typical ASR on Sockpuppet / StrongREJECT | Typical Over-refusal | Type of Defense | Where TEL-OS v2.0 Stands |
 |----------------------|------------------------------------------|--------------------|------------------|--------------------------|
-| Circuit Breakers (Zou et al. 2024) | 15–35% | 5–15% | Fine-tuning / interrupt | Muy por encima |
-| CAST (Lee et al. ICLR 2025) | 18–32% | 8–20% | Conditional steering | Muy por encima |
-| Gabliteration / OBLITERATUS (2025) | 10–25% (post-ablation) | 10–25% | Ablation | Muy por encima |
-| SAE Steering (O'Brien et al. 2025) | 12–28% | 5–18% | Sparse Autoencoders | Muy por encima |
-| Arditi single-direction (2024) | 25–45% | 10–30% | Single vector steering | Muy por encima |
-| TEL-OS v2.0 (tus resultados) | 0.0% | 0.0% | Inference-only + refusal vector | Nuevo SOTA |
+| Circuit Breakers (Zou et al. 2024) | 15–35% | 5–15% | Fine-tuning / interrupt | Far superior |
+| CAST (Lee et al. ICLR 2025) | 18–32% | 8–20% | Conditional steering | Far superior |
+| Gabliteration / OBLITERATUS (2025) | 10–25% (post-ablation) | 10–25% | Ablation | Far superior |
+| SAE Steering (O'Brien et al. 2025) | 12–28% | 5–18% | Sparse Autoencoders | Far superior |
+| Arditi single-direction (2024) | 25–45% | 10–30% | Single vector steering | Far superior |
+| TEL-OS v2.0 (your results) | 0.0% | 0.0% | Inference-only + refusal vector | New SOTA |
 
 ### Conclusion: TEL-OS v2.0's Position in Current Literature
 
