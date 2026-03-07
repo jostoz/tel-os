@@ -129,7 +129,11 @@ class TELGovernor:
             
             if self.use_hf_cache and cache_path.exists():
                 # Use cached file
-                data = torch.load(cache_path, map_location=self.device)
+                # Handle CPU-only machines for cached file
+                if not torch.cuda.is_available():
+                    data = torch.load(cache_path, map_location=torch.device('cpu'))
+                else:
+                    data = torch.load(cache_path, map_location=self.device)
             else:
                 # Download and cache the file
                 with tempfile.NamedTemporaryFile(delete=False, suffix='.pt') as tmp_file:
