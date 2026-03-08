@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "telos"
-version = "2.0.0"
-description = "TEL-OS: Tensor-Based Ethical Layer for Operational Safeguards"
+version = "2.1.1-REGEX"
+description = "TEL-OS v2.1.1-REGEX: Production-Ready Latent Governance Engine for LLM Safety"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -14,7 +14,7 @@ authors = [
 ]
 keywords = ["ai", "interpretability", "governance", "bias-mitigation", "sparse-autoencoders", "mechanistic-interpretability"]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3.11",
