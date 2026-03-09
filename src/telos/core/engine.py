@@ -16,13 +16,13 @@ import torch
 from typing import Optional, Dict, Any, List, Tuple
 import logging
 
-from telos.core.standardized import TelosStandardizedEngine
-from telos.core.hooks import GovernanceHookRegistry, HookBuilder
+from .standardized.standardized_engine import TelosStandardizedEngine
+from .hooks.hooks import GovernanceHookRegistry, HookBuilder
 
 logger = logging.getLogger(__name__)
 
 
-class TelosGovernanceEngine:
+class TELOS_V2_Governor:
     """
     TEL-OS Governance Engine v6.1 with StandardizedTransformer integration.
     
@@ -298,7 +298,7 @@ class TelosGovernanceEngine:
     
     def __repr__(self) -> str:
         return (
-            f"TelosGovernanceEngine("
+            f"TELOS_V2_Governor("
             f"model={self.model_name}, "
             f"device={self.device}, "
             f"hooks={len(self._active_hooks)})"
@@ -310,7 +310,7 @@ def create_engine(
     model_name: str = "google/gemma-2-2b-it",
     device: str = "cuda",
     **kwargs
-) -> TelosGovernanceEngine:
+) -> TELOS_V2_Governor:
     """
     Create and configure a TEL-OS Governance Engine.
     
@@ -322,7 +322,7 @@ def create_engine(
     Returns:
         Configured TelosGovernanceEngine
     """
-    engine = TelosGovernanceEngine(
+    engine = TELOS_V2_Governor(
         model_name=model_name,
         device=device,
         **kwargs

@@ -1,5 +1,7 @@
 """
-Core module initialization for TEL-OS v2.1.1-REGEX
+TEL-OS Core Module
+
+Contains the main governance engine and supporting components.
 """
 
 from .engine import TELOS_V2_Governor
