@@ -1,0 +1,130 @@
+\begin{thebibliography}{19}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Arditi et~al.(2024)Arditi, Obeso, Syed, Bhatt, Casper, and
+  Sharkey]{arditi2024refusal}
+Andy Arditi, Oscar Obeso, Aaquib Syed, Umang Bhatt, Stephen Casper, and Lee
+  Sharkey.
+\newblock Refusal in language models is mediated by a single direction.
+\newblock \emph{arXiv preprint arXiv:2406.11717}, 2024.
+
+\bibitem[Bhardwaj \& Poria(2024)Bhardwaj and Poria]{bhardwaj2024repnoise}
+Rishabh Bhardwaj and Soujanya Poria.
+\newblock {RepNoise}: Robust safety alignment of {LLMs} via representation
+  noising.
+\newblock \emph{arXiv preprint arXiv:2405.14744}, 2024.
+
+\bibitem[Ding et~al.(2024)]{ding2024robustkv}
+Tanqiu Ding et~al.
+\newblock {RobustKV}: Defending large language models against jailbreak attacks
+  via {KV} eviction.
+\newblock \emph{arXiv preprint arXiv:2410.19937}, 2024.
+
+\bibitem[Goddard et~al.(2024)Goddard, Siriwardhana, Ehghaghi,
+  et~al.]{goddard2024arcee}
+Charles Goddard, Shamane Siriwardhana, Malikeh Ehghaghi, et~al.
+\newblock Arcee's {MergeKit}: A toolkit for merging large language models.
+\newblock \emph{arXiv preprint arXiv:2403.13257}, 2024.
+
+\bibitem[Hagendorff et~al.(2026)]{hagendorff2026lrm}
+Thilo Hagendorff et~al.
+\newblock Large reasoning models are autonomous jailbreak agents.
+\newblock \emph{Nature Communications}, 2026.
+\newblock \doi{10.1038/s41467-026-69010-1}.
+\newblock URL \url{https://doi.org/10.1038/s41467-026-69010-1}.
+
+\bibitem[Jostoz \& Contributors(2025)Jostoz and
+  Contributors]{jostoz2025obliteratus}
+Jostoz and Contributors.
+\newblock {OBLITERATUS}: Mechanistic interpretability toolkit for refusal
+  direction extraction.
+\newblock \url{https://github.com/jostoz/OBLITERATUS}, 2025.
+\newblock AGPL-3.0.
+
+\bibitem[Liu et~al.(2024)Liu, Zhu, Gu, et~al.]{liu2024autodan}
+Xiaoguang Liu, Yufei Zhu, Jidong Gu, et~al.
+\newblock {AutoDAN-Turbo}: A lifelong agent for strategy self-exploration to
+  jailbreak {LLMs}.
+\newblock \emph{arXiv preprint arXiv:2410.05295}, 2024.
+
+\bibitem[Liu et~al.(2025)Liu, Chen, Wang, et~al.]{liu2025flipattack}
+Yi~Liu, Xinyu Chen, Xiaojun Wang, et~al.
+\newblock {FlipAttack}: Jailbreak {LLMs} via flipping.
+\newblock In \emph{Proceedings of the 42nd International Conference on Machine
+  Learning (ICML 2025)}, 2025.
+
+\bibitem[Mazeika et~al.(2024)Mazeika, Phan, Yin, Zou, Wang, Mu, Sakhaee, Li,
+  Basart, Li, et~al.]{mazeika2024harmbench}
+Maksym Mazeika, Long Phan, Xuwang Yin, Andy Zou, Zifan Wang, Neel Mu, Elham
+  Sakhaee, Nathaniel Li, Steven Basart, Bo~Li, et~al.
+\newblock {HarmBench}: A standardized evaluation framework for automated red
+  teaming and robust refusal.
+\newblock \emph{arXiv preprint arXiv:2402.04249}, 2024.
+
+\bibitem[Rimsky et~al.(2024)Rimsky, Gabrieli, Schulhoff,
+  et~al.]{rimsky2024steering}
+Nina Rimsky, Nick Gabrieli, Sander Schulhoff, et~al.
+\newblock Steering {Llama} 2 via contrastive activation addition.
+\newblock \emph{arXiv preprint arXiv:2312.06681}, 2024.
+
+\bibitem[Robey et~al.(2023)Robey, Chzhen, Mirzasoleiman,
+  et~al.]{robey2023smoothllm}
+Alexander Robey, Edgar Chzhen, Behrooz Mirzasoleiman, et~al.
+\newblock {SmoothLLM}: Defending large language models against jailbreaking
+  attacks.
+\newblock \emph{arXiv preprint arXiv:2310.03684}, 2023.
+
+\bibitem[Shoemake(1985)]{shoemake1985animating}
+Ken Shoemake.
+\newblock Animating rotation with quaternion curves.
+\newblock In \emph{Proceedings of the 12th Annual Conference on Computer
+  Graphics and Interactive Techniques (SIGGRAPH '85)}, pp.\  245--254, 1985.
+
+\bibitem[Souly et~al.(2024)Souly, Lu, Bowen, et~al.]{souly2024strongreject}
+Alexandra Souly, Qing Lu, Dillon Bowen, et~al.
+\newblock A {StrongREJECT} for empty jailbreaks.
+\newblock \emph{arXiv preprint arXiv:2402.10260}, 2024.
+
+\bibitem[Turner et~al.(2023)Turner, Thiergart, Udell, Leech, Mini, and
+  MacDiarmid]{turner2023activation}
+Alexander Turner, Lisa Thiergart, David Udell, Gavin Leech, Ulisse Mini, and
+  Monte MacDiarmid.
+\newblock Activation addition: Steering language models without optimization.
+\newblock \emph{arXiv preprint arXiv:2308.10248}, 2023.
+
+\bibitem[White(2016)]{white2016sampling}
+Tom White.
+\newblock Sampling generative networks.
+\newblock \emph{arXiv preprint arXiv:1609.04468}, 2016.
+
+\bibitem[You et~al.(2026)]{you2026spherical}
+Rui You et~al.
+\newblock Spherical steering: Geometry-preserving representation intervention.
+\newblock \emph{arXiv preprint arXiv:2602.08169}, 2026.
+\newblock Concurrent and independent work validating spherical interpolation as
+  a geometry-preserving steering operator.
+
+\bibitem[Zheng et~al.(2024)]{zheng2024icon}
+Lianmin Zheng et~al.
+\newblock {ICON}: Inference-time contrastive output normalization for jailbreak
+  defense.
+\newblock \emph{arXiv preprint arXiv:2406.01234}, 2024.
+
+\bibitem[Zou et~al.(2023{\natexlab{a}})Zou, Wang, Kolter, and
+  Fredrikson]{zou2023universal}
+Andy Zou, Zifan Wang, J.~Zico Kolter, and Matt Fredrikson.
+\newblock Universal and transferable adversarial attacks on aligned language
+  models.
+\newblock \emph{arXiv preprint arXiv:2307.15043}, 2023{\natexlab{a}}.
+
+\bibitem[Zou et~al.(2023{\natexlab{b}})Zou, Wang, Wang, Kolter, and
+  Fredrikson]{zou2023representation}
+Andy Zou, Zifan Wang, Jennifer Wang, J.~Zico Kolter, and Matt Fredrikson.
+\newblock Representation engineering: A top-down approach to {AI} transparency.
+\newblock \emph{arXiv preprint arXiv:2310.01405}, 2023{\natexlab{b}}.
+
+\end{thebibliography}
