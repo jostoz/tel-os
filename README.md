@@ -1,6 +1,6 @@
 # TEL-OS v3.0: Spherical Representation Steering for LLM Jailbreak Defense
 
-**Paper:** [arXiv:XXXX.XXXXX](https://arxiv.org/abs/XXXX.XXXXX)
+**Paper:** [Zenodo:10.5281/zenodo.19355058](https://zenodo.org/records/19355058) | arXiv pending endorsement
 **Vectors:** [Josstos/telos-vector](https://huggingface.co/Josstos/telos-vector)
 
 ---
@@ -142,8 +142,10 @@ tel-os/
 @article{tostado2026telos,
   title   = {TEL-OS: Spherical Representation Steering for Robust LLM Jailbreak Defense},
   author  = {Gutierrez Alvarez Tostado, Josue},
-  journal = {arXiv preprint arXiv:XXXX.XXXXX},
-  year    = {2026}
+  journal = {Zenodo preprint},
+  year    = {2026},
+  doi     = {10.5281/zenodo.19355058},
+  url     = {https://zenodo.org/records/19355058}
 }
 ```
 

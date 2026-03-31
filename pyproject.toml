@@ -44,7 +44,7 @@ dev = [
 [project.urls]
 Homepage = "https://github.com/jostoz/tel-os"
 Repository = "https://github.com/jostoz/tel-os.git"
-Paper = "https://arxiv.org/abs/XXXX.XXXXX"
+Paper = "https://zenodo.org/records/19355058"
 Vectors = "https://huggingface.co/Josstos/telos-vector"
 
 [tool.setuptools.packages.find]
