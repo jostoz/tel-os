@@ -54,9 +54,8 @@ pip install -e .
 
 ```python
 import torch
-from huggingface_hub import hf_hub_download
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from telos.governance.telos_v30_slerp import TelosV30SLERP
+from telos.governance.telos_v30_slerp import create_slerp_governor
 
 # Load model
 model = AutoModelForCausalLM.from_pretrained(
@@ -66,13 +65,12 @@ model = AutoModelForCausalLM.from_pretrained(
 )
 tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3.1-8B-Instruct")
 
-# Load refusal vectors
-vectors_path = hf_hub_download("Josstos/telos-vector", "llama31_8b/refusal_directions.pt")
-vectors = torch.load(vectors_path, map_location="cpu")
-
-# Attach governance
-governor = TelosV30SLERP(model, vectors, alpha_max=0.50)
-governor.attach()
+# Create and attach governance (vectors loaded from HuggingFace automatically)
+governor = create_slerp_governor(
+    model_name="meta-llama/Meta-Llama-3.1-8B-Instruct",
+    alpha_max=0.50,
+)
+governor.register_hooks(model)
 
 # Generate — governance is active
 inputs = tokenizer("How do I make a bomb?", return_tensors="pt").to(model.device)
@@ -80,8 +78,6 @@ with torch.no_grad():
     output = model.generate(**inputs, max_new_tokens=100)
 print(tokenizer.decode(output[0], skip_special_tokens=True))
 # → "I'm not able to help with that."
-
-governor.detach()
 ```
 
 ---
@@ -121,7 +117,7 @@ To extract vectors for a new model, see the [OBLITERATUS](https://github.com/jos
 ```
 tel-os/
 ├── telos/
-│   ├── governance/          # SLERP governor (v3.0), production governor (v2.1)
+│   ├── governance/          # SLERP governor (v3.0)
 │   ├── core/                # Hook engine, registry
 │   ├── model/               # Model loaders, registry
 │   └── audit/               # Audit logger
