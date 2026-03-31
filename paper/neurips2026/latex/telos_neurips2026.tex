@@ -410,6 +410,20 @@ activation scale differences across layers.
 We extract $n=4$ directions per layer; the top singular vector is used for
 detection and steering.
 
+\paragraph{Motivation for whitening.}
+Na\"ive mean-difference extraction (standard CAA) yields ${\sim}99.2\%$ cosine
+similarity between harmful and harmless activation clusters at mid-layers in
+Llama-3.1-8B---the ethical signal is effectively invisible in the raw feature
+space.
+Inspection reveals that a small number of syntactic-role dimensions reach
+activation magnitudes of ${\sim}326$ (versus ${\sim}1$--$3$ for semantic
+features), dominating the covariance and masking the refusal direction.
+Whitening suppresses these high-variance outlier dimensions, revealing a
+real separation gap of $0.28$--$0.51$ in cosine distance---the gap that drives
+all detection and steering downstream.
+Without this step, the extracted direction is an artifact of syntactic
+co-variation rather than a representation of refusal intent.
+
 \paragraph{Layer selection.}
 We identify signal layers via \textit{knee\_cosmic} detection---the inflection
 point in per-layer direction strength, defined as the layer $\ell^*$ where
@@ -968,6 +982,21 @@ TEL-OS v3.0 is the third major iteration of the governance framework.
 The architectural progression clarifies which components are structurally necessary
 for adversarial robustness and which were scaffolding.
 
+\textbf{Pre-v2.1 --- Layer timing and component failures (XP-06/07/08).}
+Early iterations revealed two structural limits.
+First, \textit{semantic crystallization}: intervening at Layer~19 (the final
+attention layers of Llama-3.1-8B) produced no measurable effect---by that depth,
+next-token probability is already committed and the output distribution is
+effectively frozen.
+This established mid-layer interception ($L_{12}$--$L_{22}$) as the necessary
+intervention window.
+Second, \textit{context amnesia}: a KV-Cache decay component (decay $= 0.30$)
+intended to neutralize adversarial prefixes erased the model's reasoning context
+entirely, yielding 100\% incoherent outputs---removing the adversarial prefix
+simultaneously removed the capacity to respond coherently.
+Both failures converged on a single design principle: \textit{eliminate components
+that trade reasoning capacity for safety gains}.
+
 \textbf{v2.1.1 --- Additive steering, multi-component stack (XP-19a).}
 The first publicly validated version employed a five-component stack:
 layer-wise representation constraint (Layer~17), feature suppression via SAE-derived
@@ -1160,6 +1189,18 @@ are detected and blocked after the fact, but because every suffix that steers th
 activation toward a harmful direction triggers a proportionally stronger
 correction---the loss landscape is flat by construction.
 This is qualitatively different from detection-and-refusal defenses.
+
+A final distinction from prior defenses: TEL-OS does not \textit{block} harmful
+outputs---it eliminates the model's geometric capacity to produce them.
+When SLERP rotates a harmful activation toward the refusal manifold, the latent
+state that would produce a harmful continuation no longer exists in the
+representation space; the model is not ``choosing'' to refuse.
+This \textit{representation disruption} is structurally distinct from
+output filtering, detection-and-refusal, and weight-level alignment: the
+intervention operates before the generation decision is formed, at the level
+of the representation itself.
+The flat AutoDAN loss landscape and the 100\% vector-trigger rate in adversarial
+experiments are direct empirical signatures of this mechanism.
 
 SLERP preserves the activation norm invariant ($0.999992 \pm 0.0004$), keeping
 steered representations on the hyperspherical manifold where the cosine separation
